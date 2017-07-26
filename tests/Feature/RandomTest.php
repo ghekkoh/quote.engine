@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use App\Models\Quote;
+
 class RandomTest extends TestCase
 {
     /**
@@ -16,10 +18,15 @@ class RandomTest extends TestCase
      */
     public function testDisplayRandomQuote()
     {
+        $quote = factory(Quote::class)->create();
+
+        var_dump($quote->toArray());
+        
         $response = $this->get('/');
 
         $response->assertStatus(200);
         
-        $response->assertSee('my favorite quote');
+        $response->assertSee($quote->content);
     }
 }
+

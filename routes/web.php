@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('random');
-});
+Route::get('/', 'RandomController@get');
+    
+
